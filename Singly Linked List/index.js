@@ -35,10 +35,32 @@ function SinglyLinkedList() {
         this.tail = pre;
         pre.next = null;
         this.length--;
-        if(this.length === 0) {
+        if (this.length === 0) {
             this.head = null;
             this.tail = null;
         }
         return temp;
     }
+
+    this.shift = function () {
+        if (!this.head) return undefined;
+        this.head = this.head.next;
+        this.length--;
+        if (this.length == 0) this.tail = null;
+        return this;
+    }
+
+    this.unsift = function (val) {
+        var node = new Node(val);
+        if (!this.head) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            node.next = this.head;
+            this.head = node;
+        }
+        this.length++;
+        return this;
+    }
+
 }
