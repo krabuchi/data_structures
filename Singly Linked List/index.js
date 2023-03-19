@@ -63,4 +63,39 @@ function SinglyLinkedList() {
         return this;
     }
 
+    this.get = function (idx) {
+        if(idx < 0 || idx >= this.length) return null;
+        var start = 0;
+        var node = this.head;
+        while(start !== idx) {
+            node = node.next;
+            start++;
+        }
+    }
+
+    this.set = function (idx, val) {
+        var node = this.get(idx);
+        if(!node) return false;
+        node.value = val;
+        return true;
+    }
+
+    this.insert = function (idx, val) {
+        var node = new Node(val);
+        if(idx < 0 || idx > this.length) return false;
+        if(idx === this.length) this.push(val);
+        if(idx === 0) this.unsift(val);
+
+        var prev = this.get(idx - 1);
+        var temp = prev.next;
+        node.next = temp;
+        prev.next = node;
+        this.length++;
+        return true;
+    }
+
+    this.remove = function () {
+        
+    }
+
 }
