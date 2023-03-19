@@ -71,6 +71,7 @@ function SinglyLinkedList() {
             node = node.next;
             start++;
         }
+        return node;
     }
 
     this.set = function (idx, val) {
@@ -94,8 +95,34 @@ function SinglyLinkedList() {
         return true;
     }
 
-    this.remove = function () {
-        
+    this.remove = function (idx) {
+        if(idx < 0 || idx > this.length) return null;
+        if(idx === this.length - 1) this.pop();
+        if(idx === 0) this.shift();
+        var node = this.get(idx - 1);
+        var current = node.next;
+        temp = current.next;
+        node.next = temp;
+        this.length--;
+        return current;
+    }
+
+    this.reverse = function () {
+        var temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+
+
+        var next, prev = null;
+
+        for(var i = 0; i < this.length; i++) {
+            next = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = next;    
+        }
+        return this;
+
     }
 
 }
